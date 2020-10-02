@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="IoTHubDevice.Views.SplashView"
+             Background="Black">
+
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <progRing:ProgressRing Width="50" 
+                           Height="50"
+                           IsActive="True"
+                           Foreground="SkyBlue" />
+            <TextBlock Margin="20, 0, 0, 0" Text="Welcome" FontSize="30" Foreground="White"/>
+      </StackPanel>
+
+</UserControl>
