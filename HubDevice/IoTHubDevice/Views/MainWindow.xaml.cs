@@ -13,6 +13,12 @@ namespace IoTHubDevice.Views
         {
             InitializeComponent();
 
+            this.HasSystemDecorations = false;
+            this.WindowState = WindowState.Maximized;
+            this.Topmost = true;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.CanResize = false;
+
             rootWindow.Content = new SplashView();
 
             _ = SplashProcess();
@@ -29,7 +35,7 @@ namespace IoTHubDevice.Views
         {
             await Task.Delay(5000);
 
-            rootWindow.Content = new MainView();
+            rootWindow.Content = new MainContainerView();
         }
     }
 }

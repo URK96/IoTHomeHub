@@ -6,13 +6,53 @@
              x:Class="IoTHubDevice.Views.MainView"
              Background="Black">
 
+      <UserControl.Styles>
+            <!-- <Style Selector="TextBlock.ClockPoint">
+                  <Style.Animations>
+                        <Animation Duration="0:0:2" IterationCount="Infinite">
+                              <KeyFrame Cue="0%">
+                                    <Setter Property="Opacity" Value="0.0"/>
+                              </KeyFrame>
+                              <KeyFrame Cue="50%">
+                                    <Setter Property="Opacity" Value="1.0"/>
+                              </KeyFrame>
+                              <KeyFrame Cue="100%">
+                                    <Setter Property="Opacity" Value="0.0"/>
+                              </KeyFrame>
+                        </Animation>
+                  </Style.Animations>
+            </Style> -->
+            <Style Selector="Ellipse.ClockPointOne">
+                  <Style.Animations>
+                        <Animation Duration="0:0:1" IterationCount="Infinite">
+                              <KeyFrame Cue="0%">
+                                    <Setter Property="Margin" Value="10, -30, 0, 0"/>
+                              </KeyFrame>
+                              <KeyFrame Cue="70%">
+                                    <Setter Property="Opacity" Value="1.0"/>
+                                    <Setter Property="Margin" Value="10, 50, 0, 0"/>
+                              </KeyFrame>
+                              <KeyFrame Cue="80%">
+                                    <Setter Property="Opacity" Value="0.0"/>
+                              </KeyFrame>
+                        </Animation>
+                  </Style.Animations>
+            </Style>
+      </UserControl.Styles>
+
 
       <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                  <TextBlock Name="MainClockHour" FontSize="30" Foreground="White"/>
-                  <TextBlock Name="MainClockMin" Margin="20, 0, 0, 0" FontSize="30" Foreground="White"/>
-                  <TextBlock Name="MainClockSec" Margin="20, 0, 0, 0" FontSize="15" Foreground="White"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 20">
+                  <TextBlock Name="MainDateText" FontSize="20" Foreground="White"/>
+                  <TextBlock Name="MainDateWeek" Margin="10, 0, 0, 0" FontSize="20" Foreground="White"/>
+            </StackPanel>
+
+            <StackPanel Name="MainClockLayout" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.0">
+                  <TextBlock Name="MainClockHour" FontSize="80" Foreground="White"/>
+                  <!-- <TextBlock Classes="ClockPoint" Margin="10, 0, 0, 0" Text=":" FontSize="40" Foreground="White"/> -->
+                  <Ellipse Classes="ClockPointOne" Name="MainClockPoint" Margin="10, -20, 0, 0" Width="10" Height="10" Fill="White"/>
+                  <TextBlock Name="MainClockMin" Margin="20, 0, 0, 0" FontSize="80" Foreground="White"/>
             </StackPanel>
 
       </StackPanel>
