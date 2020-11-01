@@ -29,10 +29,10 @@ namespace IoTHubDevice.Views
         {
             InitializeComponent();
 
-            this.HasSystemDecorations = false;
-            this.WindowState = WindowState.Maximized;
+            //this.HasSystemDecorations = false;
+            //this.WindowState = WindowState.Maximized;
             //this.WindowState = WindowState.FullScreen; // this option only available Avalonia 0.10.0 or above
-            this.Topmost = true;
+            //this.Topmost = true;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.CanResize = false;
 
@@ -45,7 +45,7 @@ namespace IoTHubDevice.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            rootWindow = this.FindControl<Window>("MainRootWindow");
+            AppEnvironment.mainWindow = rootWindow = this.FindControl<Window>("MainRootWindow");
         }
 
         private async Task SplashProcess()

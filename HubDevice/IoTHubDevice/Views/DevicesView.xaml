@@ -6,6 +6,22 @@
              x:Class="IoTHubDevice.Views.DevicesView"
              Background="Black">
 
-      <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Devices List" Foreground="White" />
+      <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Height="50" Click="FindButtonClick">Add new device</Button>
+
+            <ItemsControl Items="{Binding DeviceList}" Margin="0, 30, 0, 0">
+                  <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                              <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Name}" Foreground="White" />
+                                    <TextBlock Text="{Binding MACAddress}" Foreground="White" />
+                                    <TextBlock Text="{Binding Path}" Foreground="White" />
+                              </StackPanel>
+                        </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+      </StackPanel>
 
 </UserControl>

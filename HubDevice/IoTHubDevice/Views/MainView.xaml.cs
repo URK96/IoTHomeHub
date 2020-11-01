@@ -16,23 +16,33 @@ namespace IoTHubDevice.Views
         private TextBlock clockHour;
         private TextBlock clockMin;
         private Ellipse clockPoint;
+        private StackPanel weatherLayout;
+        private TextBlock weatherTemp;
 
         private DispatcherTimer clockTimer;
+        private DispatcherTimer weatherTimer;
 
         public MainView()
         {
             InitializeComponent();
 
             clockTimer.Start();
+            weatherTimer.Start();
         }
 
         private void InitializeComponent()
         {
-            clockTimer = new DispatcherTimer()
+            clockTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(1000)
             };
             clockTimer.Tick += UpdateClock;
+
+            weatherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(5)
+            };
+            weatherTimer.Tick += UpdateWeather;
 
             AvaloniaXamlLoader.Load(this);
 
@@ -43,6 +53,9 @@ namespace IoTHubDevice.Views
             clockHour = this.FindControl<TextBlock>("MainClockHour");
             clockMin = this.FindControl<TextBlock>("MainClockMin");
             clockPoint = this.FindControl<Ellipse>("MainClockPoint");
+
+            weatherLayout = this.FindControl<StackPanel>("MainWeatherLayout");
+            weatherTemp = this.FindControl<TextBlock>("WeatherTemperature");
         }
 
         private void UpdateClock(object sender, EventArgs e)
@@ -57,6 +70,15 @@ namespace IoTHubDevice.Views
             //clockSec.Text = dt.Second.ToString();
 
             clockLayout.Opacity = 1.0;
+        }
+
+        private async void UpdateWeather(object sender, EventArgs e)
+        {
+            await AppEnvironment.weather.UpdateData("Seoul");
+
+            weatherTemp.Text = $"{AppEnvironment.weather.Data.Main.Temperature.CelsiusCurrent} C";
+
+            weatherLayout.Opacity = 1.0;
         }
     }
 }

@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+        xmlns:app="clr-namespace:IoTHubDevice.AppEnvironment"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
+        x:Class="IoTHubDevice.Views.BTFindDialog"
+        Title="AvaloniaAppTemplate" Width="300" Height="250"
+        Background="DarkGray">
+
+  <StackPanel Orientation="Vertical">
+    <Button Click="FindButtonClick">Find BT Dialog</Button>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+      <progRing:ProgressRing Name="SearchStatusRing" Width="30" Height="30" IsActive="false" Foreground="SkyBlue"/>
+    </StackPanel>
+
+    <ItemsControl Items="{Binding SearchDevices}" Margin="0, 30, 0, 0">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Path}" />
+          </StackPanel>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </StackPanel>
+
+</Window>
