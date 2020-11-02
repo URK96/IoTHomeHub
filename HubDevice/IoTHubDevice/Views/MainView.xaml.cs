@@ -5,6 +5,9 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 
 using System;
+using System.Drawing;
+using System.Net;
+using System.IO;
 
 namespace IoTHubDevice.Views
 {
@@ -17,6 +20,7 @@ namespace IoTHubDevice.Views
         private TextBlock clockMin;
         private Ellipse clockPoint;
         private StackPanel weatherLayout;
+        private Avalonia.Controls.Image weatherIcon;
         private TextBlock weatherTemp;
 
         private DispatcherTimer clockTimer;
@@ -55,6 +59,7 @@ namespace IoTHubDevice.Views
             clockPoint = this.FindControl<Ellipse>("MainClockPoint");
 
             weatherLayout = this.FindControl<StackPanel>("MainWeatherLayout");
+            weatherIcon = this.FindControl<Avalonia.Controls.Image>("WeatherIcon");
             weatherTemp = this.FindControl<TextBlock>("WeatherTemperature");
         }
 
@@ -65,7 +70,7 @@ namespace IoTHubDevice.Views
             dateText.Text = $"{dt.Year}.{dt.Month}.{dt.Day}";
             dateWeek.Text = dt.DayOfWeek.ToString();
 
-            clockHour.Text = dt.Hour.ToString();
+            clockHour.Text = dt.Hour.ToString("D2");
             clockMin.Text = dt.Minute.ToString("D2");
             //clockSec.Text = dt.Second.ToString();
 
@@ -74,9 +79,20 @@ namespace IoTHubDevice.Views
 
         private async void UpdateWeather(object sender, EventArgs e)
         {
-            await AppEnvironment.weather.UpdateData("Seoul");
+            await AppEnvironment.weather.UpdateData("Incheon, KR");
+            
+            using (var wc = new WebClient())
+            {
+                string icon = AppEnvironment.weather.Data.Weathers[0].Icon;
 
-            weatherTemp.Text = $"{AppEnvironment.weather.Data.Main.Temperature.CelsiusCurrent} C";
+                if (!File.Exists($"{icon}.png"))
+                {
+                    await wc.DownloadFileTaskAsync(System.IO.Path.Combine(AppEnvironment.weatherIconBaseURL, $"{icon}.png"), $"{icon}.png");
+                }
+
+                weatherIcon.Source = new Avalonia.Media.Imaging.Bitmap($"{icon}.png");
+            }
+            weatherTemp.Text = $"{AppEnvironment.weather.Data.Main.Temperature.CelsiusCurrent:F1}℃";
 
             weatherLayout.Opacity = 1.0;
         }

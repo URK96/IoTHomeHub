@@ -21,23 +21,24 @@ namespace IoTHubDevice.Services
 
         public async Task UpdateData(string inputCity = "")
         {
-            try
+            await Task.Run(() =>
             {
-                city = string.IsNullOrWhiteSpace(inputCity) ? city : inputCity;
-
-                if (string.IsNullOrWhiteSpace(city))
+                try
                 {
-                    return;
+                    city = string.IsNullOrWhiteSpace(inputCity) ? city : inputCity;
+
+                    if (string.IsNullOrWhiteSpace(city))
+                    {
+                        return;
+                    }
+
+                    Data = client.Query(city);
                 }
-
-                await Task.Delay(100);
-
-                Data = client.Query(city);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            });
         }
     }
 }

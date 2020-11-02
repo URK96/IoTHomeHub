@@ -25,6 +25,8 @@
             </Style>
       </UserControl.Styles>
 
+      <Canvas Width="800" Height="400" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
       <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 20">
@@ -39,9 +41,12 @@
             </StackPanel>
 
             <StackPanel Name="MainWeatherLayout" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 100, 0, 0" Opacity="0.0">
-                  <TextBlock Name="WeatherTemperature" FontSize="30" Foreground="White"/>
+                  <Image Name="WeatherIcon" Width="50" Height="50" />
+                  <TextBlock Name="WeatherTemperature" FontSize="30" Foreground="White" TextAlignment="Center"/>
             </StackPanel>
 
       </StackPanel>
+
+      </Canvas>
 
 </UserControl>
