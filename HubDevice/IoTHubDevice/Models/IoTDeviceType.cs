@@ -12,37 +12,59 @@ namespace IoTHubDevice.Models
             LightSensor
         }
 
-        public interface IBaseType
+        public abstract class BaseType
         {
-            void UpdateData();
+            public IoTDevice device;
+
+            public BaseType(IoTDevice device)
+            {
+                this.device = device;
+            }
+
+            public abstract void UpdateData();
         }
 
-        public class HTSensor : IBaseType
+        public class HTSensor : BaseType
         {
             public double Humidity { get; private set; }
             public double Temperature { get; private set; }
 
-            public void UpdateData()
+            public HTSensor(IoTDevice device) : base(device) 
+            { 
+
+            }
+
+            public override void UpdateData()
             {
 
             }
         }
 
-        public class DustSensor : IBaseType
+        public class DustSensor : BaseType
         {
             public double Dust { get; private set; }
 
-            public void UpdateData()
+            public DustSensor(IoTDevice device) : base(device)
+            {
+
+            }
+
+            public override void UpdateData()
             {
                 
             }
         }
 
-        public class LightSensor : IBaseType
+        public class LightSensor : BaseType
         {
             public double Value { get; private set; }
 
-            public void UpdateData()
+            public LightSensor(IoTDevice device) : base(device)
+            {
+
+            }
+
+            public override void UpdateData()
             {
 
             }
