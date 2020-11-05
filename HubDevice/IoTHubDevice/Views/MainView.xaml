@@ -25,28 +25,28 @@
             </Style>
       </UserControl.Styles>
 
-      <Canvas Width="800" Height="400" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-      <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 20">
-                  <TextBlock Name="MainDateText" FontSize="20" Foreground="White"/>
-                  <TextBlock Name="MainDateWeek" Margin="10, 0, 0, 0" FontSize="20" Foreground="White"/>
-            </StackPanel>
-
-            <StackPanel Name="MainClockLayout" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.0">
-                  <TextBlock Name="MainClockHour" FontSize="80" Foreground="White"/>
-                  <Ellipse Classes="ClockPoint" Name="MainClockPoint" Margin="15, -20, 0, 0" Width="10" Height="10" Fill="White"/>
-                  <TextBlock Name="MainClockMin" Margin="20, 0, 0, 0" FontSize="80" Foreground="White"/>
-            </StackPanel>
-
-            <StackPanel Name="MainWeatherLayout" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 100, 0, 0" Opacity="0.0">
-                  <Image Name="WeatherIcon" Width="50" Height="50" />
-                  <TextBlock Name="WeatherTemperature" FontSize="30" Foreground="White" TextAlignment="Center"/>
-            </StackPanel>
-
+  <DockPanel Width="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0, 50, 0, 0">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 20">
+        <TextBlock Name="MainDateText" FontSize="20" Foreground="White"/>
+        <TextBlock Name="MainDateWeek" Margin="10, 0, 0, 0" FontSize="20" Foreground="White"/>
       </StackPanel>
 
-      </Canvas>
+      <StackPanel Name="MainClockLayout" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.0">
+        <TextBlock Name="MainClockHour" FontSize="80" Foreground="White"/>
+        <Ellipse Classes="ClockPoint" Name="MainClockPoint" Margin="15, -20, 0, 0" Width="10" Height="10" Fill="White"/>
+        <TextBlock Name="MainClockMin" Margin="20, 0, 0, 0" FontSize="80" Foreground="White"/>
+      </StackPanel>
+
+      <StackPanel Name="MainWeatherLayout" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 20, 0, 0" Opacity="0.0">
+        <Image Name="WeatherIcon" Width="40" Height="40" />
+        <TextBlock Name="WeatherTemperature" FontSize="20" Foreground="White" TextAlignment="Center"/>
+      </StackPanel>
+    </StackPanel>
+
+    <StackPanel  Orientation="Horizontal" Height="30" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 0, 0, 10">
+      <Image Name="NetworkStatusIcon" Source="/Assets/network.png" />
+    </StackPanel>
+  </DockPanel>
 
 </UserControl>

@@ -9,22 +9,26 @@
         Title="AvaloniaAppTemplate" Width="300" Height="250"
         Background="DarkGray">
 
-  <StackPanel Orientation="Vertical">
-    <Button Click="FindButtonClick">Find BT Dialog</Button>
+  <DockPanel>
+  
+    <StackPanel Orientation="Vertical">
+      <Button Click="FindButtonClick">Find BT Dialog</Button>
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-      <progRing:ProgressRing Name="SearchStatusRing" Width="30" Height="30" IsActive="false" Foreground="SkyBlue"/>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <progRing:ProgressRing Name="SearchStatusRing" Width="30" Height="30" IsActive="false" Foreground="SkyBlue"/>
+      </StackPanel>
+
+      <ItemsControl Items="{Binding SearchDevices}" Margin="0, 30, 0, 0">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Vertical">
+              <TextBlock Text="{Binding Path}" />
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
     </StackPanel>
 
-    <ItemsControl Items="{Binding SearchDevices}" Margin="0, 30, 0, 0">
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-          <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Path}" />
-          </StackPanel>
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl>
-  </StackPanel>
+  </DockPanel>
 
 </Window>

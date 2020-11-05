@@ -92,7 +92,7 @@ namespace IoTHubDevice.Views
 
                 weatherIcon.Source = new Avalonia.Media.Imaging.Bitmap($"{icon}.png");
             }
-            weatherTemp.Text = $"{AppEnvironment.weather.Data.Main.Temperature.CelsiusCurrent:F1}℃";
+            weatherTemp.Text = $"{AppEnvironment.weather.Data.Main.Temperature.CelsiusCurrent:F1} ℃";
 
             weatherLayout.Opacity = 1.0;
         }
