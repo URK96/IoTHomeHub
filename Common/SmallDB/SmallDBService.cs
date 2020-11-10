@@ -67,6 +67,115 @@ namespace SmallDB
             return true;
         }
 
+        public static bool AddColumn<T>(string columnName, T defaultValue)
+        {
+            try
+            {
+                var column = new DataColumn()
+                {
+                    DataType = typeof(T),
+                    AllowDBNull = true,
+                    ColumnName = columnName,
+                    Caption = columnName,
+                    DefaultValue = defaultValue
+                };
+
+                DBTable.Columns.Add(column);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool AddRow(Dictionary<string, object> dic)
+        {
+            try
+            {
+                var row = DBTable.NewRow();
+
+                foreach (var item in dic)
+                {
+                    try
+                    {                        
+                        row[item.Key] = item.Value;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                    }
+                }
+
+                DBTable.Rows.Add(row);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+
+                return false;
+            }
+            finally
+            {
+                SaveDB();
+            }
+
+            return true;
+        }
+
+        public static bool EditRowCell<T>(DataRow dr, string index, T value)
+        {
+            try
+            {
+                dr[index] = value;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+
+                return false;
+            }
+            finally
+            {
+                SaveDB();
+            }
+
+            return true;
+        }
+
+        public static bool EditRowCell(DataRow dr, Dictionary<string, object> dic)
+        {
+            try
+            {
+                foreach (var item in dic)
+                {
+                    try
+                    {
+                        dr[item.Key] = item.Value;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+
+                return false;
+            }
+            finally
+            {
+                SaveDB();
+            }
+
+            return true;
+        }
+
         public static List<DataRow> FindDataRow<T>(string index, T value)
         {
             try

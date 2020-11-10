@@ -48,10 +48,18 @@ namespace IoTHubDevice.Services
                 {
                     var iotDevice = new IoTDevice(device)
                     {
-                        BTName = await device.GetNameAsync(),
                         MACAddress = string.Empty,
                         Path = device.ObjectPath.ToString(),
                     };
+
+                    try
+                    {
+                        iotDevice.BTName = await device.GetNameAsync();
+                    }
+                    catch (Exception)
+                    {
+                        iotDevice.BTName = "Unknown";
+                    }
 
                     AppEnvironment.deviceManager.PairedList.Add(iotDevice);
                 }
@@ -75,12 +83,22 @@ namespace IoTHubDevice.Services
                 {
                     await Dispatcher.UIThread.InvokeAsync(async () =>
                     {
-                        AppEnvironment.deviceManager.FindedList.Add(new IoTDevice(device)
+                        var iotDevice = new IoTDevice(device)
                         {
-                            BTName = await device.GetNameAsync(),
                             MACAddress = string.Empty,
                             Path = device.ObjectPath.ToString()
-                        });
+                        };
+
+                        try
+                        {
+                            iotDevice.BTName = await device.GetNameAsync();
+                        }
+                        catch (Exception)
+                        {
+                            iotDevice.BTName = "Unknown";
+                        }
+
+                        AppEnvironment.deviceManager.FindedList.Add(iotDevice);
                     });
                 }))
                 {

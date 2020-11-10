@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Input;
+using Avalonia.Media;
 using Avalonia.Markup.Xaml;
 
 using AvaloniaProgressRing;
@@ -19,7 +21,7 @@ namespace IoTHubDevice.Views
         {
             InitializeComponent();
 
-            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             DataContext = new BTFindDialogViewModel();
         }
@@ -42,9 +44,17 @@ namespace IoTHubDevice.Views
 
         private async void FindButtonClick(object sender, RoutedEventArgs e)
         {
-            //searchStatusRing.IsActive = true;
             await AppEnvironment.btService.FindDevices();
-            //searchStatusRing.IsActive = false;
+        }
+
+        private void PairedBTItemLayoutPointerEnter(object sender, PointerEventArgs e)
+        {
+            ((StackPanel)sender).Background = Brushes.DarkGray;
+        }
+
+        private void PairedBTItemLayoutPointerLeave(object sender, PointerEventArgs e)
+        {
+            ((StackPanel)sender).Background = Brushes.Black;
         }
     }
 }

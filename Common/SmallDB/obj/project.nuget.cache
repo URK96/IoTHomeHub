@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cqQF2DrTgfo6E2yyWvbmIHR+Zhlsb+re4EEUEB+p5pIMa3gkpQT6V++BrRk/insnOQo2QoLAxsZBqxaxbxKhYg==",
+  "dgSpecHash": "S8z/o9OyKiptqKqgxLSxJCxlZX3Lh8/gxkOFF5K4qPmF1envQuJ11OtrLu2TJiyqYheyX1fOGIzNgJnEtK5eqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\chlwl\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\chlwl\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\chlwl\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"
-  ],
+  "projectFilePath": "/home/urk96/IoTHomeHub/Common/SmallDB/SmallDB.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -3,29 +3,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="800" Height="400"
              x:Class="IoTHubDevice.Views.DevicesView"
              Background="Black">
 
-  <DockPanel Width="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-  
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-      <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="160" Height="50" Click="FindButtonClick">Add new device</Button>
-        
-      <ItemsControl Items="{Binding DeviceList}" Margin="0, 30, 0, 0">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate>
-            
-            <StackPanel Orientation="Vertical">
-              <TextBlock Text="{Binding Name}" Foreground="White" />
-              <TextBlock Text="{Binding MACAddress}" Foreground="White" />
-              <TextBlock Text="{Binding Path}" Foreground="White" />
-            </StackPanel>
-            
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
-    </StackPanel>
+  <DockPanel Width="800" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top" Margin="0, 20, 0, 0">
+      <Button HorizontalAlignment="Center" Width="160" Height="30" Click="FindButtonClick">Add new device</Button>
       
+      <ScrollViewer Height="300" VerticalScrollBarVisibility="Auto">
+        <ItemsControl Items="{Binding DeviceList}" Margin="0, 30, 0, 0">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+
+              <StackPanel Orientation="Horizontal"
+                          PointerEnter="PairedBTItemLayoutPointerEnter"
+                          PointerLeave="PairedBTItemLayoutPointerLeave">  
+                <Image Width="50" Height="50" Margin="10, 10, 10, 10" Source="/Assets/network.png" />
+
+                <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
+                  <TextBlock Text="{Binding BTName}" Foreground="White" />
+                  <TextBlock Text="{Binding Path}" Foreground="White" />
+                </StackPanel>
+              </StackPanel>
+              
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </StackPanel>
   </DockPanel>
     
 </UserControl>

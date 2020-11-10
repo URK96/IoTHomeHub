@@ -25,4 +25,7 @@
   <ItemGroup>
     <Reference Include="OpenWeatherAPI" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\SmallDB\SmallDB.csproj" />
+  </ItemGroup>
 </Project>
