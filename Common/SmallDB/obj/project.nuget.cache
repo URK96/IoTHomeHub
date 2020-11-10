@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S8z/o9OyKiptqKqgxLSxJCxlZX3Lh8/gxkOFF5K4qPmF1envQuJ11OtrLu2TJiyqYheyX1fOGIzNgJnEtK5eqg==",
+  "dgSpecHash": "WA7tNXA1R7fo8DpIeTRPqsb9iesoB0XGLLzvoVsTnBDReAOvYlY4rB/98cDQW6jzkdwi2jmdSuVWO7RHSg6tcQ==",
   "success": true,
-  "projectFilePath": "/home/urk96/IoTHomeHub/Common/SmallDB/SmallDB.csproj",
+  "projectFilePath": "c:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
