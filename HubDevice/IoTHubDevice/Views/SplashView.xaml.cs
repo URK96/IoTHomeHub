@@ -11,6 +11,8 @@ using IoTHubDevice.Services;
 
 using SmallDB;
 
+using DBConstant = SmallDB.Constant.IoTDeviceDBConstant;
+
 namespace IoTHubDevice.Views
 {
     public class SplashView : UserControl
@@ -74,11 +76,11 @@ namespace IoTHubDevice.Views
 
         private void CreateDBSchemas()
         {
-            SmallDBService.AddColumn("DeviceName", string.Empty);
-            SmallDBService.AddColumn("BTName", string.Empty);
-            SmallDBService.AddColumn("MACAddress", string.Empty);
-            SmallDBService.AddColumn("SensorType", 0);
-            SmallDBService.AddColumn("DeviceStatus", 0);
+            SmallDBService.AddColumn(DBConstant.DEVICE_NAME, string.Empty);
+            SmallDBService.AddColumn(DBConstant.BLUETOOTH_NAME, string.Empty);
+            SmallDBService.AddColumn(DBConstant.BLUEZ_PATH, string.Empty);
+            SmallDBService.AddColumn(DBConstant.SENSOR_TYPE, 0);
+            SmallDBService.AddColumn(DBConstant.DEVICE_STATUS, 0);
         }
     }
 }

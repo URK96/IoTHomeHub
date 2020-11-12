@@ -7,6 +7,8 @@ using System.Text;
 
 using SmallDB;
 
+using DBConstant = SmallDB.Constant.IoTDeviceDBConstant;
+
 namespace IoTHubServer
 {
     public enum DeviceType
@@ -35,12 +37,12 @@ namespace IoTHubServer
 
         public IoTDevice(DataRow dr)
         {
-            DeviceName = dr["DeviceName"] as string;
-            BTName = dr["BTName"] as string;
-            MACAddress = dr["MACAddress"] as string;
-            Path = dr["Path"] as string;
-            SensorType = (DeviceType)dr["SensorType"];
-            Status = (DeviceStatus)dr["DeviceStatus"];
+            DeviceName = dr[DBConstant.DEVICE_NAME] as string;
+            BTName = dr[DBConstant.BLUETOOTH_NAME] as string;
+            MACAddress = dr[DBConstant.MAC_ADDRESS] as string;
+            Path = dr[DBConstant.BLUEZ_PATH] as string;
+            SensorType = (DeviceType)dr[DBConstant.SENSOR_TYPE];
+            Status = (DeviceStatus)dr[DBConstant.DEVICE_STATUS];
         }
     }
 }

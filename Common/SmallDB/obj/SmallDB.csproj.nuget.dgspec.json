@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj": {}
+    "C:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj": {}
   },
   "projects": {
-    "c:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj": {
+    "C:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj",
+        "projectUniqueName": "C:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj",
         "projectName": "SmallDB",
-        "projectPath": "c:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj",
+        "projectPath": "C:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\SmallDB.csproj",
         "packagesPath": "C:\\Users\\chlwl\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\obj\\",
+        "outputPath": "C:\\Users\\chlwl\\source\\repos\\URK96\\IoTHomeHub\\Common\\SmallDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -30,6 +30,7 @@
         },
         "frameworks": {
           "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +42,7 @@
       },
       "frameworks": {
         "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "imports": [
             "net461",
             "net462",
@@ -56,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
