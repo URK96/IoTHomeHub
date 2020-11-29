@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IoTMobileApp.DeviceDetailPage">
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="0, 0, 1, 0.1"
+                     HorizontalOptions="Fill"
+                     Orientation="Horizontal">
+            <Image />
+
+            <StackLayout Orientation="Vertical">
+                <Label x:Name="IoTDeviceName" HorizontalTextAlignment="Center" />
+                <Label x:Name="IoTDeviceType" HorizontalTextAlignment="Center" />
+                <Label x:Name="IoTDeviceMAC" HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+
+        <Grid x:Name="HTSensorInfoLayout" 
+              AbsoluteLayout.LayoutFlags="PositionProportional"
+              AbsoluteLayout.LayoutBounds="0.5, 0.4"
+              IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="온도" />
+            <Label Grid.Row="0" Grid.Column="1"
+                   Text="습도" />
+            <Label x:Name="HTSensorTemp" Grid.Row="1" Grid.Column="0" />
+            <Label x:Name="HTSensorHumidity" Grid.Row="1" Grid.Column="1" />
+        </Grid>
+
+        <Grid x:Name="DustSensorInfoLayout" 
+              AbsoluteLayout.LayoutFlags="PositionProportional"
+              AbsoluteLayout.LayoutBounds="0.5, 0.4"
+              IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="상태" />
+            <Label Grid.Row="0" Grid.Column="1"
+                   Text="측정치" />
+            <Label x:Name="DustSensorStatus" Grid.Row="1" Grid.Column="0" />
+            <Label x:Name="DustSensorValue" Grid.Row="1" Grid.Column="1" />
+        </Grid>
+
+        <Grid x:Name="LightSensorInfoLayout" 
+              AbsoluteLayout.LayoutFlags="PositionProportional"
+              AbsoluteLayout.LayoutBounds="0.5, 0.4"
+              IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="상태" />
+            <Label Grid.Row="0" Grid.Column="1"
+                   Text="측정치" />
+            <Label x:Name="LightSensorStatus" Grid.Row="1" Grid.Column="0" />
+            <Label x:Name="LightSensorValue" Grid.Row="1" Grid.Column="1" />
+        </Grid>
+    </AbsoluteLayout>
+    
+</ContentPage>

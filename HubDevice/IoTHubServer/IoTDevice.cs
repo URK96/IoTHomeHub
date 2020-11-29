@@ -34,6 +34,7 @@ namespace IoTHubServer
         public string Path { get; set; }
         public DeviceType SensorType { get; set; }
         public DeviceStatus Status { get; set; }
+        public string StatusArgument {get; set;}
 
         public IoTDevice(DataRow dr)
         {
@@ -43,6 +44,12 @@ namespace IoTHubServer
             Path = dr[DBConstant.BLUEZ_PATH] as string;
             SensorType = (DeviceType)dr[DBConstant.SENSOR_TYPE];
             Status = (DeviceStatus)dr[DBConstant.DEVICE_STATUS];
+            StatusArgument = dr[DBConstant.STATUS_ARG] as string;
+        }
+
+        public IoTDevice()
+        {
+            
         }
     }
 }

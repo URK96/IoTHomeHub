@@ -7,3 +7,12 @@
 /home/urk96/IoTHomeHub/Common/SmallDB/obj/Debug/netstandard2.0/SmallDB.csproj.CoreCompileInputs.cache
 /home/urk96/IoTHomeHub/Common/SmallDB/obj/Debug/netstandard2.0/SmallDB.dll
 /home/urk96/IoTHomeHub/Common/SmallDB/obj/Debug/netstandard2.0/SmallDB.pdb
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\bin\Debug\netstandard2.0\SmallDB.deps.json
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\bin\Debug\netstandard2.0\SmallDB.dll
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\bin\Debug\netstandard2.0\SmallDB.pdb
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\obj\Debug\netstandard2.0\SmallDB.csprojAssemblyReference.cache
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\obj\Debug\netstandard2.0\SmallDB.AssemblyInfoInputs.cache
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\obj\Debug\netstandard2.0\SmallDB.AssemblyInfo.cs
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\obj\Debug\netstandard2.0\SmallDB.csproj.CoreCompileInputs.cache
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\obj\Debug\netstandard2.0\SmallDB.dll
+C:\Users\chlwl\source\repos\URK96\IoTHomeHub\Common\SmallDB\obj\Debug\netstandard2.0\SmallDB.pdb
