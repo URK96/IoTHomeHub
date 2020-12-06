@@ -11,6 +11,9 @@ namespace SmallDB.Constant
         public const string SENSOR_TYPE = "SensorType";
         public const string DEVICE_STATUS = "DeviceStatus";
         public const string STATUS_ARG = "StatusArgument";
+        public const string BT_SERVICE_UUID = "ServiceUUID";
+        public const string BT_GATT_RX_UUID = "GATTRxUUID";
+        public const string BT_GATT_TX_UUID = "GATTTxUUID";
     }
 
     public static class IoTDeviceTokenIndex
@@ -22,5 +25,9 @@ namespace SmallDB.Constant
         public const string SENSOR_TYPE = "sensorType";
         public const string DEVICE_STATUS = "status";
         public const string STATUS_ARG = "statusArgument";
+        public const string BT_SERVICE_UUID = "serviceUUID";
+        public const string BT_GATT_RX_UUID = "gattRxUUID";
+        public const string BT_GATT_TX_UUID = "gattTxUUID";
+
     }
 }

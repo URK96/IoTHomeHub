@@ -6,20 +6,10 @@
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="IoTDeviceDB">
             <xs:complexType>
-              <xs:sequence>
-                <xs:element name="TestString" type="xs:string" default="" minOccurs="0" />
-                <xs:element name="TestBoolean" type="xs:boolean" default="false" minOccurs="0" />
-                <xs:element name="TestInt" type="xs:int" default="0" minOccurs="0" />
-              </xs:sequence>
             </xs:complexType>
           </xs:element>
         </xs:choice>
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <IoTDeviceDB>
-    <TestString>String</TestString>
-    <TestBoolean>true</TestBoolean>
-    <TestInt>3</TestInt>
-  </IoTDeviceDB>
 </NewDataSet>

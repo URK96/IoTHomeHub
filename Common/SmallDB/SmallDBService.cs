@@ -21,6 +21,8 @@ namespace SmallDB
             try
             {
                 DBTable = new DataTable("IoTDeviceDB");
+
+                SaveDB();
             }
             catch (Exception ex)
             {
@@ -32,6 +34,11 @@ namespace SmallDB
         {
             try
             {
+                if (DBTable == null)
+                {
+                    DBTable = new DataTable();
+                }
+
                 DBTable.Clear();
                 DBTable.ReadXml(DeviceDBFile);
             }

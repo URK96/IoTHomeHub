@@ -33,9 +33,9 @@ namespace IoTHubDevice.Views
             AppEnvironment.deviceManager = new IoTDeviceManager();
             AppEnvironment.weather = new WeatherService();
 
-            TestDB();
+            // TestDB();
 
-            // CheckDB();
+            CheckDB();
         }
 
         private void InitializeComponent()
@@ -81,6 +81,10 @@ namespace IoTHubDevice.Views
             SmallDBService.AddColumn(DBConstant.BLUEZ_PATH, string.Empty);
             SmallDBService.AddColumn(DBConstant.SENSOR_TYPE, 0);
             SmallDBService.AddColumn(DBConstant.DEVICE_STATUS, 0);
+            SmallDBService.AddColumn(DBConstant.STATUS_ARG, string.Empty);
+            SmallDBService.AddColumn(DBConstant.BT_SERVICE_UUID, string.Empty);
+            SmallDBService.AddColumn(DBConstant.BT_GATT_RX_UUID, string.Empty);
+            SmallDBService.AddColumn(DBConstant.BT_GATT_TX_UUID, string.Empty);
         }
     }
 }

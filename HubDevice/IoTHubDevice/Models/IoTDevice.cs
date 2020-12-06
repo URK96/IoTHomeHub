@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text;
@@ -8,11 +9,13 @@ using System.Text;
 using HashtagChris.DotNetBlueZ;
 using HashtagChris.DotNetBlueZ.Extensions;
 
+using DBConstant = SmallDB.Constant.IoTDeviceDBConstant;
+
 namespace IoTHubDevice.Models
 {
     public class IoTDevice : Device
     {
-        public Device BaseDevice { get; }
+        public Device BaseDevice { get; set; }
         public string DeviceName { get; set; }
         public string BTName { get; set; }
         public string MACAddress { get; set; }
@@ -30,11 +33,31 @@ namespace IoTHubDevice.Models
 
         private Dictionary<string, object> btOption;
 
+        public IoTDevice(DataRow dr)
+        {
+            DeviceName = dr[DBConstant.DEVICE_NAME] as string;
+            BTName = dr[DBConstant.BLUETOOTH_NAME] as string;
+            MACAddress = dr[DBConstant.MAC_ADDRESS] as string;
+            SensorType = (IoTDeviceType.DeviceType)dr[DBConstant.SENSOR_TYPE];
+            Status = DeviceStatus.Disconnected;
+            ServiceUUID = dr[DBConstant.BT_SERVICE_UUID] as string;
+            RXUUID = dr[DBConstant.BT_GATT_RX_UUID] as string;
+            TXUUID = dr[DBConstant.BT_GATT_TX_UUID] as string;
+
+            FindDevice(MACAddress);
+        }
+
         public IoTDevice(Device device)
         {
             BaseDevice = device;
-
             Status = DeviceStatus.Disconnected;
+            BTName = "ED-BT 52810";
+            Path = device.ObjectPath.ToString();
+            
+            var paths = Path.Split('/');
+            MACAddress = paths[paths.Length - 1].Replace('_', ':');
+            
+            InitializeInfo();
 
             Connected += async delegate
             {
@@ -51,6 +74,28 @@ namespace IoTHubDevice.Models
 
             btOption = new Dictionary<string, object>();
             btOption.Add("device", $"{BaseDevice.ObjectPath}");
+        }
+
+        private async void InitializeInfo()
+        {
+            var paths = BaseDevice.ObjectPath.ToString().Split('/');
+            MACAddress = paths[paths.Length - 1].Replace('_', ':');
+
+            ServiceUUID = (await BaseDevice.GetUUIDsAsync())[2];
+            RXUUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+            TXUUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+        }
+
+        private async void FindDevice(string mac)
+        {
+            mac = mac.Replace(':', '_');
+
+            var devices = await AppEnvironment.btService.BTAdapter.GetDevicesAsync();
+            var result = from device in devices
+                        where device.ObjectPath.ToString().Contains(mac)
+                        select device;
+
+            BaseDevice = result.FirstOrDefault();
         }
 
         public async Task ConnectDevice()
@@ -123,11 +168,15 @@ namespace IoTHubDevice.Models
                     }
                 };
 
+                Status = DeviceStatus.Connected;
+
                 await Task.Delay(500);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
+
+                Status = DeviceStatus.Disconnected;
             }
         }
 

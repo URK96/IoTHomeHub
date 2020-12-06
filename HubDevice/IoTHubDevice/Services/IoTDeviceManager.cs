@@ -16,5 +16,13 @@ namespace IoTHubDevice.Services
             PairedList = new ObservableCollection<IoTDevice>();
             FindedList = new ObservableCollection<IoTDevice>();
         }
+
+        public async void ConnectPairedDevices()
+        {
+            foreach (var device in PairedList)
+            {
+                await device.ConnectDevice();
+            }
+        }
     }
 }
