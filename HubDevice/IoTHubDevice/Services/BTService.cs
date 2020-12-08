@@ -29,11 +29,11 @@ namespace IoTHubDevice.Services
 
         public BTService()
         {
-            _ = LoadFirstAdapter();
-            _ = LoadPairedDevices();
+            LoadFirstAdapter();
+            LoadPairedDevices();
         }
 
-        public async Task LoadFirstAdapter()
+        public async void LoadFirstAdapter()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace IoTHubDevice.Services
             }
         }
 
-        public async Task LoadPairedDevices()
+        public void LoadPairedDevices()
         {
             try
             {
@@ -55,28 +55,6 @@ namespace IoTHubDevice.Services
                 {
                     AppEnvironment.deviceManager.PairedList.Add(new IoTDevice(dr));
                 }
-
-                // var devices = await adapter.GetDevicesAsync();
-
-                // foreach (var device in devices)
-                // {
-                //     var iotDevice = new IoTDevice(device)
-                //     {
-                //         MACAddress = string.Empty,
-                //         Path = device.ObjectPath.ToString(),
-                //     };
-
-                //     try
-                //     {
-                //         iotDevice.BTName = await device.GetNameAsync();
-                //     }
-                //     catch (Exception)
-                //     {
-                //         iotDevice.BTName = "Unknown";
-                //     }
-
-                //     AppEnvironment.deviceManager.PairedList.Add(iotDevice);
-                // }
             }
             catch (Exception ex)
             {

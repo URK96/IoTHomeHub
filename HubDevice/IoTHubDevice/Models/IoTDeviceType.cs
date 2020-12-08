@@ -1,5 +1,9 @@
 using System;
 
+using SmallDB;
+
+using DBConstant = SmallDB.Constant.IoTDeviceDBConstant;
+
 namespace IoTHubDevice.Models
 {
     public static class IoTDeviceType
@@ -21,6 +25,16 @@ namespace IoTHubDevice.Models
                 this.device = device;
             }
 
+            public void UpdateDB(string arg)
+            {
+                var dr = SmallDBService.FindDataRow(DBConstant.MAC_ADDRESS, device.MACAddress);
+
+                if (dr != null)
+                {
+                    SmallDBService.EditRowCell(dr, DBConstant.STATUS_ARG, arg);
+                }
+            }
+
             public abstract void UpdateData();
         }
 
@@ -34,14 +48,27 @@ namespace IoTHubDevice.Models
 
             }
 
-            public override void UpdateData()
+            public override async void UpdateData()
             {
+                if (await device.SendCommand("Data"))
+                {
+                    var data = await device.ReceiveResponse();
+                    var datas = data.Split(';');
 
+                    if (datas.Length == 2)
+                    {
+                        UpdateDB(data);
+
+                        Humidity = double.Parse(datas[0]);
+                        Temperature = double.Parse(datas[1]);
+                    }
+                }
             }
         }
 
         public class DustSensor : BaseType
         {
+            public int Level { get; private set; }
             public double Dust { get; private set; }
 
             public DustSensor(IoTDevice device) : base(device)
@@ -49,24 +76,47 @@ namespace IoTHubDevice.Models
 
             }
 
-            public override void UpdateData()
+            public override async void UpdateData()
             {
-                
+                if (await device.SendCommand("Data"))
+                {
+                    var data = await device.ReceiveResponse();
+                    var datas = data.Split(';');
+
+                    if (datas.Length == 2)
+                    {
+                        UpdateDB(data);
+
+                        Level = int.Parse(datas[0]);
+                        Dust = double.Parse(datas[1]);
+                    }
+                }
             }
         }
 
         public class LightSensor : BaseType
         {
-            public double Value { get; private set; }
+            public double LightValue { get; private set; }
 
             public LightSensor(IoTDevice device) : base(device)
             {
 
             }
 
-            public override void UpdateData()
+            public override async void UpdateData()
             {
+                if (await device.SendCommand("Data"))
+                {
+                    var data = await device.ReceiveResponse();
+                    var datas = data.Split(';');
 
+                    if (datas.Length == 1)
+                    {
+                        UpdateDB(data);
+
+                        LightValue = double.Parse(datas[0]);
+                    }
+                }
             }
         }
     }

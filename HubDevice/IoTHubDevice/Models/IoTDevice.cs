@@ -30,6 +30,13 @@ namespace IoTHubDevice.Models
         public GattCharacteristic RXCharacteristic { get; set; }
         public GattCharacteristic TXCharacteristic { get; set; }
 
+        public string DeviceTypeString => SensorType switch
+        {
+            IoTDeviceType.DeviceType.HTSensor => "HT Sensor",
+            IoTDeviceType.DeviceType.DustSensor => "Dust Sensor",
+            IoTDeviceType.DeviceType.LightSensor => "Light Sensor",
+            _ => "Unknown"
+        };
 
         private Dictionary<string, object> btOption;
 
@@ -45,6 +52,8 @@ namespace IoTHubDevice.Models
             TXUUID = dr[DBConstant.BT_GATT_TX_UUID] as string;
 
             FindDevice(MACAddress);
+            InitializeTypeClass();
+            InitializeConnectInfo();
         }
 
         public IoTDevice(Device device)
@@ -55,10 +64,41 @@ namespace IoTHubDevice.Models
             Path = device.ObjectPath.ToString();
             
             var paths = Path.Split('/');
-            MACAddress = paths[paths.Length - 1].Replace('_', ':');
+            var macTemp = paths[paths.Length - 1].Replace('_', ':');
+            MACAddress = macTemp.Remove(0, 4);
             
             InitializeInfo();
+            InitializeConnectInfo();
+        }
 
+        private async void InitializeInfo()
+        {
+            ServiceUUID = (await BaseDevice.GetUUIDsAsync())[2];
+            RXUUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+            TXUUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+        }
+
+        private void InitializeTypeClass()
+        {
+            switch (SensorType)
+            {
+                case IoTDeviceType.DeviceType.HTSensor:
+                    Sensor = new IoTDeviceType.HTSensor(this);
+                    break;
+                case IoTDeviceType.DeviceType.DustSensor:
+                    Sensor = new IoTDeviceType.DustSensor(this);
+                    break;
+                case IoTDeviceType.DeviceType.LightSensor:
+                    Sensor = new IoTDeviceType.LightSensor(this);
+                    break;
+                default:
+                    Sensor = null;
+                    break;
+            }
+        }
+
+        private void InitializeConnectInfo()
+        {
             Connected += async delegate
             {
                 Status = DeviceStatus.Connected;
@@ -76,16 +116,6 @@ namespace IoTHubDevice.Models
             btOption.Add("device", $"{BaseDevice.ObjectPath}");
         }
 
-        private async void InitializeInfo()
-        {
-            var paths = BaseDevice.ObjectPath.ToString().Split('/');
-            MACAddress = paths[paths.Length - 1].Replace('_', ':');
-
-            ServiceUUID = (await BaseDevice.GetUUIDsAsync())[2];
-            RXUUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
-            TXUUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
-        }
-
         private async void FindDevice(string mac)
         {
             mac = mac.Replace(':', '_');
@@ -96,6 +126,22 @@ namespace IoTHubDevice.Models
                         select device;
 
             BaseDevice = result.FirstOrDefault();
+        }
+
+        public async Task CheckConnection()
+        {
+            try
+            {
+                await BaseDevice.ConnectAsync();
+
+                Status = DeviceStatus.Connected;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+
+                Status = DeviceStatus.Disconnected;
+            }
         }
 
         public async Task ConnectDevice()
@@ -115,7 +161,7 @@ namespace IoTHubDevice.Models
                 {
                     Debug.WriteLine("Get Gatt service fail");
 
-                    return;
+                    throw new Exception("Get Gatt service fail");
                 }
                 else
                 {
@@ -132,7 +178,7 @@ namespace IoTHubDevice.Models
                 {
                     Debug.WriteLine("Get Gatt TX characteristic fail");
 
-                    return;
+                    throw new Exception("Get Gatt TX fail");
                 }
                 else
                 {
@@ -149,7 +195,7 @@ namespace IoTHubDevice.Models
                 {
                     Debug.WriteLine("Get Gatt RX Characteristic fail");
 
-                    return;
+                    throw new Exception("Get Gatt RX fail");
                 }
                 else
                 {
@@ -209,6 +255,8 @@ namespace IoTHubDevice.Models
 
             try
             {
+                await Task.Delay(2000);
+
                 if (RXCharacteristic == null)
                 {
                     throw new Exception("No RX Characteristic");

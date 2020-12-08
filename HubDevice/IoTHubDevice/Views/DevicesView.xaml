@@ -11,26 +11,34 @@
     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top" Margin="0, 20, 0, 0">
       <Button HorizontalAlignment="Center" Width="160" Height="30" Click="FindButtonClick">Add new device</Button>
       
-      <ScrollViewer Height="300" VerticalScrollBarVisibility="Auto">
-        <ItemsControl Items="{Binding DeviceList}" Margin="0, 30, 0, 0">
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
+      <Grid Margin="0, 50, 0, 0" RowDefinitions="*" ColumnDefinitions="*, *">
+        <ScrollViewer Height="300" VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0">
+          <ListBox Name="PairedDeviceListBox" Items="{Binding DeviceList}" Margin="0, 30, 0, 0" SelectionChanged="">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
 
-              <StackPanel Orientation="Horizontal"
-                          PointerEnter="PairedBTItemLayoutPointerEnter"
-                          PointerLeave="PairedBTItemLayoutPointerLeave">  
-                <Image Width="50" Height="50" Margin="10, 10, 10, 10" Source="/Assets/network.png" />
+                <StackPanel Orientation="Horizontal"
+                            PointerEnter="PairedBTItemLayoutPointerEnter"
+                            PointerLeave="PairedBTItemLayoutPointerLeave">  
+                  <Image Width="50" Height="50" Margin="10, 10, 10, 10" Source="/Assets/network.png" />
 
-                <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
-                  <TextBlock Text="{Binding BTName}" Foreground="White" />
-                  <TextBlock Text="{Binding Path}" Foreground="White" />
+                  <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
+                    <TextBlock Text="{Binding BTName}" Foreground="White" />
+                    <TextBlock Text="{Binding Path}" Foreground="White" />
+                  </StackPanel>
                 </StackPanel>
-              </StackPanel>
-              
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </ScrollViewer>
+                
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical">
+          <TextBlock Name="DeviceName"/>
+          <TextBlock Name="DeviceType"/>
+          <TextBlock Name="DeviceMAC"/>
+        </StackPanel>
+      </Grid>
     </StackPanel>
   </DockPanel>
     

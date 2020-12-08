@@ -12,15 +12,19 @@
   <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
   
     <StackPanel Orientation="Vertical">
-      <Button Click="FindButtonClick">Find BT Dialog</Button>
+      <Grid RowDefinitions="Auto" ColumnDefinitions="*, *">
+        <Button Grid.Row="0" Grid.Column="0" Click="FindButtonClick">Find Device</Button>
+        <Button Grid.Row="0" Grid.Column="1" Click="CloseButtonClick">Close</Button>
+      </Grid>
 
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+      <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
         <progRing:ProgressRing Name="SearchStatusRing" Width="30" Height="30" IsActive="false" Foreground="SkyBlue"/>
+        <TextBlock Name="StatusLabel" Foreground="White"/>
       </StackPanel>
 
-      <ScrollViewer VerticalScrollBarVisibility="Visible" Height="150">
-        <ItemsControl Items="{Binding SearchDevices}" Margin="0, 30, 0, 0">
-          <ItemsControl.ItemTemplate>
+      <ScrollViewer VerticalScrollBarVisibility="Visible" Height="200" VerticalAlignment="Stretch">
+        <ListBox Name="DeviceListBox" Items="{Binding SearchDevices}" Margin="0, 30, 0, 0" Background="Black" SelectionChanged="SelectionChanged">
+          <ListBox.ItemTemplate>
             <DataTemplate>
 
               <StackPanel Orientation="Horizontal"
@@ -35,8 +39,8 @@
               </StackPanel>
               
             </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
+          </ListBox.ItemTemplate>
+        </ListBox>
       </ScrollViewer>
     </StackPanel>
 

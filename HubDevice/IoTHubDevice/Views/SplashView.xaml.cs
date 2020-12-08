@@ -36,6 +36,7 @@ namespace IoTHubDevice.Views
             // TestDB();
 
             CheckDB();
+            AppEnvironment.deviceManager.ConnectPairedDevices();
         }
 
         private void InitializeComponent()
