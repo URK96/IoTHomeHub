@@ -6,12 +6,16 @@
             x:Class="IoTMobileApp.MainPage"
             android:TabbedPage.ToolbarPlacement="Bottom">
 
-    <NavigationPage Title="IoTDevice">
+    <NavigationPage Title="IoT 장치">
         <x:Arguments>
             <local:DevicePage />
         </x:Arguments>
     </NavigationPage>
 
-    <local:SettingPage />
+    <NavigationPage Title="설정">
+        <x:Arguments>
+            <local:SettingPage />
+        </x:Arguments>
+    </NavigationPage>
 
 </TabbedPage>

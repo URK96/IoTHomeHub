@@ -15,7 +15,8 @@ namespace IoTMobileApp
         Unknown = 0,
         HTSensor = 1,
         DustSensor,
-        LightSensor
+        LightSensor,
+        GasSensor
     }
 
     public enum DeviceStatus

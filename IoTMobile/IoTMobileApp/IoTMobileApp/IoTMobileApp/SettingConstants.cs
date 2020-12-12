@@ -4,8 +4,8 @@ using System.Text;
 
 namespace IoTMobileApp
 {
-    public static class AppEnvironment
+    public static class SettingConstants
     {
-        public static string serverRoot = "";
+        public const string SERVER_IP = "Server_IP";
     }
 }
