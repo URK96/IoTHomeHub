@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Data;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using IoTHubDevice.Services;
 
@@ -32,11 +33,14 @@ namespace IoTHubDevice.Views
             AppEnvironment.btService = new BTService();
             AppEnvironment.deviceManager = new IoTDeviceManager();
             AppEnvironment.weather = new WeatherService();
+            AppEnvironment.commandManager = new CommandManager();
 
             // TestDB();
 
             CheckDB();
+            AppEnvironment.btService.LoadPairedDevices();
             AppEnvironment.deviceManager.ConnectPairedDevices();
+
         }
 
         private void InitializeComponent()
@@ -68,6 +72,8 @@ namespace IoTHubDevice.Views
             if (!File.Exists(SmallDBService.DeviceDBFile))
             {
                 SmallDBService.CreateDB();
+                CreateDBSchemas();
+                SmallDBService.SaveDB();
             }
             else
             {
@@ -80,6 +86,7 @@ namespace IoTHubDevice.Views
             SmallDBService.AddColumn(DBConstant.DEVICE_NAME, string.Empty);
             SmallDBService.AddColumn(DBConstant.BLUETOOTH_NAME, string.Empty);
             SmallDBService.AddColumn(DBConstant.BLUEZ_PATH, string.Empty);
+            SmallDBService.AddColumn(DBConstant.MAC_ADDRESS, string.Empty);
             SmallDBService.AddColumn(DBConstant.SENSOR_TYPE, 0);
             SmallDBService.AddColumn(DBConstant.DEVICE_STATUS, 0);
             SmallDBService.AddColumn(DBConstant.STATUS_ARG, string.Empty);

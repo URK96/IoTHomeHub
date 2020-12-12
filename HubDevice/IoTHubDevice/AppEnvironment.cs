@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 
 using System;
+using System.Diagnostics;
 using System.IO;
 
 using IoTHubDevice.Services;
@@ -17,5 +18,6 @@ namespace IoTHubDevice
         public static IoTDeviceManager deviceManager;
         public static BTService btService;
         public static WeatherService weather;
+        public static CommandManager commandManager;
     }
 }

@@ -30,7 +30,6 @@ namespace IoTHubDevice.Services
         public BTService()
         {
             LoadFirstAdapter();
-            LoadPairedDevices();
         }
 
         public async void LoadFirstAdapter()

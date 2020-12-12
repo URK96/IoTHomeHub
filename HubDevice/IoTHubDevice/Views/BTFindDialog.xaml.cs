@@ -82,16 +82,74 @@ namespace IoTHubDevice.Views
                 deviceListBox.SelectedItems = null;
                 deviceListBox.IsEnabled = false;
 
-                statusLabel.Text = $"Connecting {device.MACAddress}";
+                statusLabel.Text = $"Connecting {device.MACAddress}...";
 
-                await device.BaseDevice.ConnectAsync();
+                await device.ConnectDevice();
+
+                await Task.Delay(1000);
 
                 // Add check type process
+                statusLabel.Text = $"Check response {device.MACAddress}...";
+
+                await device.SendCommand("Server");
+
+                if (!(await device.ReceiveResponse()).Equals("Module"))
+                {
+                    throw new Exception("Not match check");
+                }
+
+                await Task.Delay(1000);
+
+                statusLabel.Text = $"Check type {device.MACAddress}...";
+
+                await device.SendCommand("Type");
+
+                var type = await device.ReceiveResponse();
+
+                var sep = device.MACAddress.Split(':')[0];
+
+                if (type.Equals("HT"))
+                {
+                    device.SensorType = IoTDeviceType.DeviceType.HTSensor;
+                    device.Sensor = new IoTDeviceType.HTSensor(device);
+
+                    device.DeviceName = $"HT {sep}";
+                }
+                else if (type.Equals("Light"))
+                {
+                    device.SensorType = IoTDeviceType.DeviceType.LightSensor;
+                    device.Sensor = new IoTDeviceType.LightSensor(device);
+
+                    device.DeviceName = $"Light {sep}";
+                }
+                else if (type.Equals("Dust"))
+                {
+                    device.SensorType = IoTDeviceType.DeviceType.DustSensor;
+                    device.Sensor = new IoTDeviceType.DustSensor(device);
+
+                    device.DeviceName = $"Dust {sep}";
+                }
+                else if (type.Equals("Gas"))
+                {
+                    device.SensorType = IoTDeviceType.DeviceType.GasSensor;
+                    device.Sensor = new IoTDeviceType.GasSensor(device);
+
+                    device.DeviceName = $"Gas {sep}";
+                }
+                else
+                {
+                    throw new Exception("Cannot recognize type");
+                }
+
+                await Task.Delay(1000);
+
+                device.Status = DeviceStatus.Connected;
 
                 statusLabel.Text = $"Success";
 
-                // AppEnvironment.deviceManager.PairedList.Add(device);
-                // AppEnvironment.deviceManager.FindedList.Remove(device);
+                AppEnvironment.deviceManager.PairedList.Add(device);
+                AppEnvironment.deviceManager.FindedList.Remove(device);
+                AppEnvironment.deviceManager.AddDeviceToDB(device);
 
                 await Task.Delay(2000);
             }

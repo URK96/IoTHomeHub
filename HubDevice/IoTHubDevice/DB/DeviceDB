@@ -6,10 +6,34 @@
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="IoTDeviceDB">
             <xs:complexType>
+              <xs:sequence>
+                <xs:element name="DeviceName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="BTName" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="Path" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="MACAddress" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="SensorType" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="DeviceStatus" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="StatusArgument" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="ServiceUUID" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="GATTRxUUID" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="GATTTxUUID" type="xs:string" default="" minOccurs="0" />
+              </xs:sequence>
             </xs:complexType>
           </xs:element>
         </xs:choice>
       </xs:complexType>
     </xs:element>
   </xs:schema>
+  <IoTDeviceDB>
+    <DeviceName>HT C1</DeviceName>
+    <BTName>ED-BT 52810</BTName>
+    <Path>/org/bluez/hci0/dev_C1_6D_A3_3B_20_D8</Path>
+    <MACAddress>C1:6D:A3:3B:20:D8</MACAddress>
+    <SensorType>1</SensorType>
+    <DeviceStatus>2</DeviceStatus>
+    <StatusArgument>24.30;43.90;0</StatusArgument>
+    <ServiceUUID>6e400001-b5a3-f393-e0a9-e50e24dcca9e</ServiceUUID>
+    <GATTRxUUID>6e400003-b5a3-f393-e0a9-e50e24dcca9e</GATTRxUUID>
+    <GATTTxUUID>6e400002-b5a3-f393-e0a9-e50e24dcca9e</GATTTxUUID>
+  </IoTDeviceDB>
 </NewDataSet>

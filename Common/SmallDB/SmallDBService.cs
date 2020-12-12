@@ -183,13 +183,13 @@ namespace SmallDB
             return true;
         }
 
-        public static List<DataRow> FindDataRow<T>(string index, T value)
+        public static DataRow FindDataRow<T>(string index, T value)
         {
             try
             {
                 var rows = from row in DBTable.AsEnumerable() where CheckEqual(row, index, value) select row;
 
-                return new List<DataRow>(rows);
+                return rows.FirstOrDefault();
             }
             catch (Exception ex)
             {

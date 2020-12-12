@@ -13,7 +13,7 @@
       
       <Grid Margin="0, 50, 0, 0" RowDefinitions="*" ColumnDefinitions="*, *">
         <ScrollViewer Height="300" VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0">
-          <ListBox Name="PairedDeviceListBox" Items="{Binding DeviceList}" Margin="0, 30, 0, 0" SelectionChanged="">
+          <ListBox Name="PairedDeviceListBox" Items="{Binding DeviceList}" Margin="0, 30, 0, 0" Background="Black" SelectionChanged="DeviceListSelectionChanged">
             <ListBox.ItemTemplate>
               <DataTemplate>
 
@@ -23,8 +23,8 @@
                   <Image Width="50" Height="50" Margin="10, 10, 10, 10" Source="/Assets/network.png" />
 
                   <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
-                    <TextBlock Text="{Binding BTName}" Foreground="White" />
-                    <TextBlock Text="{Binding Path}" Foreground="White" />
+                    <TextBlock Text="{Binding DeviceName}" Foreground="White" />
+                    <TextBlock Text="{Binding MACAddress}" Foreground="White" />
                   </StackPanel>
                 </StackPanel>
                 
@@ -33,10 +33,13 @@
           </ListBox>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical">
-          <TextBlock Name="DeviceName"/>
-          <TextBlock Name="DeviceType"/>
-          <TextBlock Name="DeviceMAC"/>
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical" Margin="0, 50, 0, 0">
+          <TextBlock Name="DeviceName" Foreground="White" FontSize="20"/>
+          <TextBlock Name="DeviceType" Foreground="White" FontSize="15"/>
+          <TextBlock Name="DeviceMAC" Foreground="White" FontSize="15"/>
+          <TextBlock Name="DeviceStatus" Foreground="White" Margin="0, 20, 0, 0" FontSize="15"/>
+          <TextBlock Name="DeviceInfo" Margin="0, 50, 0, 0" Foreground="White" FontSize="20"/>
+          <Button Name="DeviceCommand" Margin="0, 20, 0, 0" Click="CommandButtonClick"/>
         </StackPanel>
       </Grid>
     </StackPanel>

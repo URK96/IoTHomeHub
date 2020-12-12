@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 using SmallDB;
+
+using DBConstant = SmallDB.Constant.IoTDeviceDBConstant;
 
 namespace IoTHubServer.Controllers
 {
@@ -42,6 +45,41 @@ namespace IoTHubServer.Controllers
     }
 
     [ApiController]
+    [Route("api/iothub/devices/command")]
+    public class IoTCommandController : ControllerBase
+    {
+        [HttpGet("{command}")]
+        public string Get(string command)
+        {
+            try
+            {
+                if (!Directory.Exists("CMD"))
+                {
+                    Directory.CreateDirectory("CMD");
+                }
+                
+                var dt = DateTime.Now;
+                var fileName = $"{dt.Year}{dt.Month}{dt.Day}{dt.Hour}{dt.Minute}{dt.Second}";
+
+                var fi = new FileInfo(Path.Combine("CMD", fileName));
+
+                using (var sw = fi.CreateText())
+                {
+                    sw.WriteLine(command);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+
+                return "x~x";
+            }
+
+            return "OK";
+        }
+    }
+
+    [ApiController]
     [Route("api/iothub/devices")]
     public class IoTDeviceController : ControllerBase
     {
@@ -63,18 +101,27 @@ namespace IoTHubServer.Controllers
         [HttpGet]
         public List<IoTDevice> Get()
         {
+            // var list = new List<IoTDevice>();
+
+            // list.Add(new IoTDevice()
+            // {
+            //     DeviceName = $"TestDevice",
+            //     BTName = $"TestBT",
+            //     MACAddress = "00:00:00:00:00:00",
+            //     Path = "/Test/TestBT",
+            //     SensorType = DeviceType.HTSensor,
+            //     Status = DeviceStatus.Connected,
+            //     StatusArgument = CreateRandomArg()
+            // });
+
             var list = new List<IoTDevice>();
 
-            list.Add(new IoTDevice()
+            SmallDBService.LoadDB();
+
+            foreach (DataRow dr in SmallDBService.DBTable.Rows)
             {
-                DeviceName = $"TestDevice",
-                BTName = $"TestBT",
-                MACAddress = "00:00:00:00:00:00",
-                Path = "/Test/TestBT",
-                SensorType = DeviceType.HTSensor,
-                Status = DeviceStatus.Connected,
-                StatusArgument = CreateRandomArg()
-            });
+                list.Add(new IoTDevice(dr));
+            }
 
             return list;
         }
@@ -82,12 +129,20 @@ namespace IoTHubServer.Controllers
         [HttpGet("status/info/{mac}")]
         public string Get(string mac)
         {
-            if (!mac.Equals("00:00:00:00:00:00"))
-            {
-                return "-1;-1";
-            }
+            // if (!mac.Equals("00:00:00:00:00:00"))
+            // {
+            //     return "-1;-1";
+            // }
 
-            return CreateRandomArg();
+            // return CreateRandomArg();
+
+            SmallDBService.LoadDB();
+
+            var device = from DataRow dr in SmallDBService.DBTable.Rows 
+                        where (dr[DBConstant.MAC_ADDRESS] as string).Equals(mac) 
+                        select new IoTDevice(dr);
+
+            return device.FirstOrDefault().StatusArgument;
         }
 
         private string CreateRandomMAC()
