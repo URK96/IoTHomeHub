@@ -21,6 +21,8 @@ namespace SmallDB
             try
             {
                 DBTable = new DataTable("IoTDeviceDB");
+
+                SaveDB();
             }
             catch (Exception ex)
             {
@@ -32,6 +34,11 @@ namespace SmallDB
         {
             try
             {
+                if (DBTable == null)
+                {
+                    DBTable = new DataTable();
+                }
+
                 DBTable.Clear();
                 DBTable.ReadXml(DeviceDBFile);
             }
@@ -176,13 +183,13 @@ namespace SmallDB
             return true;
         }
 
-        public static List<DataRow> FindDataRow<T>(string index, T value)
+        public static DataRow FindDataRow<T>(string index, T value)
         {
             try
             {
                 var rows = from row in DBTable.AsEnumerable() where CheckEqual(row, index, value) select row;
 
-                return new List<DataRow>(rows);
+                return rows.FirstOrDefault();
             }
             catch (Exception ex)
             {

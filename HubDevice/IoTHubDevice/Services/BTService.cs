@@ -1,6 +1,8 @@
 using Avalonia.Threading;
 
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -9,11 +11,16 @@ using HashtagChris.DotNetBlueZ.Extensions;
 
 using IoTHubDevice.Models;
 
+using SmallDB;
+
+using DBConstant = SmallDB.Constant.IoTDeviceDBConstant;
+
 namespace IoTHubDevice.Services
 {
     public class BTService
     {
         public bool IsSearching { get; private set; }
+        public IAdapter1 BTAdapter { get; }
 
         public event EventHandler BTFindStart;
         public event EventHandler BTFindEnd;
@@ -22,11 +29,10 @@ namespace IoTHubDevice.Services
 
         public BTService()
         {
-            _ = LoadFirstAdapter();
-            _ = LoadPairedDevices();
+            LoadFirstAdapter();
         }
 
-        public async Task LoadFirstAdapter()
+        public async void LoadFirstAdapter()
         {
             try
             {
@@ -38,30 +44,15 @@ namespace IoTHubDevice.Services
             }
         }
 
-        public async Task LoadPairedDevices()
+        public void LoadPairedDevices()
         {
             try
             {
-                var devices = await adapter.GetDevicesAsync();
-
-                foreach (var device in devices)
+                SmallDBService.LoadDB();
+                
+                foreach (DataRow dr in SmallDBService.DBTable.Rows)
                 {
-                    var iotDevice = new IoTDevice(device)
-                    {
-                        MACAddress = string.Empty,
-                        Path = device.ObjectPath.ToString(),
-                    };
-
-                    try
-                    {
-                        iotDevice.BTName = await device.GetNameAsync();
-                    }
-                    catch (Exception)
-                    {
-                        iotDevice.BTName = "Unknown";
-                    }
-
-                    AppEnvironment.deviceManager.PairedList.Add(iotDevice);
+                    AppEnvironment.deviceManager.PairedList.Add(new IoTDevice(dr));
                 }
             }
             catch (Exception ex)
@@ -79,26 +70,35 @@ namespace IoTHubDevice.Services
                 IsSearching = true;
                 BTFindStart?.Invoke(this, new EventArgs());
 
+                var exceptMAC = new List<string>();
+
+                foreach (var pDevice in AppEnvironment.deviceManager.PairedList)
+                {
+                    exceptMAC.Add(pDevice.MACAddress.Replace(':', '_'));
+                }
+
+                var devices = await BTAdapter.GetDevicesAsync();
+
+                foreach (var device in devices)
+                {
+                    var paths = device.ObjectPath.ToString().Split('/');
+                    var mac = paths[paths.Length - 1];
+
+                    if (!exceptMAC.Contains(mac) &&
+                        await CheckBTName(device))
+                    {
+                        AppEnvironment.deviceManager.FindedList.Add(new IoTDevice(device));
+                    }
+                }
+
                 using (await adapter.WatchDevicesAddedAsync(async device =>
                 {
                     await Dispatcher.UIThread.InvokeAsync(async () =>
                     {
-                        var iotDevice = new IoTDevice(device)
+                        if (await CheckBTName(device))
                         {
-                            MACAddress = string.Empty,
-                            Path = device.ObjectPath.ToString()
-                        };
-
-                        try
-                        {
-                            iotDevice.BTName = await device.GetNameAsync();
+                            AppEnvironment.deviceManager.FindedList.Add(new IoTDevice(device));
                         }
-                        catch (Exception)
-                        {
-                            iotDevice.BTName = "Unknown";
-                        }
-
-                        AppEnvironment.deviceManager.FindedList.Add(iotDevice);
                     });
                 }))
                 {
@@ -117,6 +117,25 @@ namespace IoTHubDevice.Services
                 IsSearching = false;
                 BTFindEnd?.Invoke(this, new EventArgs());
             }
+        }
+
+        private async Task<bool> CheckBTName(Device device)
+        {
+            try
+            {
+                var btName = await device.GetNameAsync();
+
+                if (!btName.Equals("ED-BT 52810"))
+                {
+                    throw new Exception("Not equal bt name");
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
