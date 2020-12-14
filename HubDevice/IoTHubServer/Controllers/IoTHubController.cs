@@ -30,18 +30,6 @@ namespace IoTHubServer.Controllers
         {
             return "IoTHubController Default";
         }
-
-        // [HttpGet("{input:int}")]
-        // public string Get(int input)
-        // {
-        //     return "This is integer";
-        // }
-
-        // [HttpGet("{input}")]
-        // public string Get(string input)
-        // {
-        //     return input;
-        // }
     }
 
     [ApiController]
@@ -83,37 +71,9 @@ namespace IoTHubServer.Controllers
     [Route("api/iothub/devices")]
     public class IoTDeviceController : ControllerBase
     {
-        // [HttpGet]
-        // public List<IoTDevice> Get()
-        // {
-        //     var list = new List<IoTDevice>();
-
-        //     SmallDBService.LoadDB();
-
-        //     foreach (DataRow row in SmallDBService.DBTable.Rows)
-        //     {
-        //         list.Add(new IoTDevice(row));
-        //     }
-            
-        //     return list;
-        // }
-
         [HttpGet]
         public List<IoTDevice> Get()
         {
-            // var list = new List<IoTDevice>();
-
-            // list.Add(new IoTDevice()
-            // {
-            //     DeviceName = $"TestDevice",
-            //     BTName = $"TestBT",
-            //     MACAddress = "00:00:00:00:00:00",
-            //     Path = "/Test/TestBT",
-            //     SensorType = DeviceType.HTSensor,
-            //     Status = DeviceStatus.Connected,
-            //     StatusArgument = CreateRandomArg()
-            // });
-
             var list = new List<IoTDevice>();
 
             SmallDBService.LoadDB();
