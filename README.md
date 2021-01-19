@@ -14,12 +14,12 @@
   * Hub Mobile App 제작
   * Simple DB Interface 제작
   
-* 전덕원
+* 전덕원 (DeokWon1213)
   * Hub Device Layout 제작
   * IoT Module 제작
   * Test, Feedback 담당
   
-* 이정인
+* 이정인 (fpdlxms95)
   * IoT Module 제작
   * IoT Module 외형 제작
   * Test, Feedback 담당
