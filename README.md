@@ -62,4 +62,4 @@ IoT Module : C, C++
   
 ## Project Framework
 
-<img src="/path/to/img.jpg" width="40%" height="30%" title="IoTHomeHub Project Framework"></img>
+<img src="https://github.com/URK96/IoTHomeHub/blob/master/GitImages/ProjectFramework.png" width="70%" height="30%" title="IoTHomeHub Project Framework"></img>
