@@ -98,5 +98,5 @@ IoT Module : C, C++
   * Project Framework 내에서 BT 통신 규격을 정의한 Header 파일도 포함
   
 ## Project Usage
-본 Project를 동작시키기 위해서는 환경을 구성해야 합니다. 자세한 내용은 Wiki 항목의 Usage 카테고리 내의 페이지를 참조하세요.   
+본 Project를 동작시키기 위해서는 환경을 구성해야 합니다. 자세한 내용은 Wiki 항목의 Deployment 카테고리 내의 페이지를 참조하세요.   
 [Wiki 바로가기](https://github.com/URK96/IoTHomeHub/wiki "Wiki")
