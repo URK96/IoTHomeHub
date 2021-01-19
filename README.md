@@ -97,3 +97,95 @@ IoT Module : C, C++
   * 센서들과 부가기능이 포함되어 있는 IoT Sample Module Source Code
   * Project Framework 내에서 BT 통신 규격을 정의한 Header 파일도 포함
   
+## Server Prepare Work
+본 Project의 Server는 ASP.NET Core에 기본적으로 포함된 Kestrel 서버를 이용하지만 보안 구성을 위해 Reverse Proxy 구성을 Code에 적용하였으며 이를 위해 정상적으로 Server를 실행하려면 Apache 같은 중간 Server를 구성해야 합니다.   
+Demo의 경우 Ubuntu 또는 Debian 기반의 Linux OS & Apache 서버를 기준으로 구성하였으며 하단 설명 부분도 해당 환경을 기준으로 합니다.   
+그 외 서버나 Reverse Proxy 서버를 구성하지 않는 경우, [링크](https://docs.microsoft.com/ko-kr/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-5.0)를 참조해주세요.   
+
+### 1. Apache 설치
+아래 명령어를 입력해 Apache를 설치합니다. (apt 기준)   
+```
+sudo apt install apache2
+```
+Apache 설치 후에는 정상적인 활성화를 위해 재부팅을 권장합니다.
+
+### 2. Hub Server 빌드 & 배포
+Terminal에서 해당 프로젝트 폴더로 이동한 후 아래 명령어를 입력합니다.
+```
+dotnet clean
+dotnet publish -c Release
+```
+해당 명령어 작업이 끝나면 IoTHubServer폴더 내부에 /bin/Release/netcoreapp3.1/publish 폴더가 생성되어 있습니다.
+다른 위치에 폴더를 새로 만든 후 해당 경로의 내용물을 복사하시면 됩니다.
+
+### 3. Apache 서버 구성
+Apache 구성 경로인 /etc/apache2로 이동합니다. 해당 경로의 sites-available 폴더로 이동합니다.   
+해당 경로에 iot.homehub.com.conf 파일을 아래 내용을 추가하여 생성합니다. 이 때, 파일 이름은 임의로 작성해도 무방하지만 코드 내용과 일관성을 위해 해당 파일 이름을 사용해 주세요.
+```
+<VirtualHost *:*>
+    RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+</VirtualHost>
+
+<VirtualHost *:80>
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:6002/
+    ProxyPassReverse / http://127.0.0.1:6002/
+    ServerName iot.homehub.com
+    ServerAlias iot.homehub.com
+    ErrorLog /home/urk96/logs/error-iot.homehub.com.log
+    CustomLog /home/urk96/logs/access-iot.homehub.com.log common
+</VirtualHost>
+```
+작성할 때, ProxyPass와 ProxyPassReverse의 포트 번호는 충돌하지 않는 범위 내에서 임의로 변경이 가능합니다. 단, 두 항목의 포트 번호는 동일해아 합니다.
+
+### 4. Apache 모듈 활성화
+Apache 설정 파일 및 Proxy Server 구성을 위해 Apache 모듈을 활성화해야 합니다. 아래 명령을 입력하여 활성화합니다.
+```
+sudo a2enmod headers proxy
+```
+
+### 5. Apache 서버 시작
+Apache 설정이 모두 끝났으면 아래 명령어를 입력하여 구성 파일을 활성화하고 Apache 서버를 시작합니다.
+```
+sudo a2ensite iot.homehub.com.conf
+sudo service apache2 restart
+```
+
+### 6. Kestrel 서버 구성
+Linux System Service에 Kestrel 서버를 둥록하기 위해 /etc/systemd/system 경로로 이동합니다.   
+해당 경로에 kestrel-iot.homehub.com.service 파일을 아래 내용을 포함하여 생성합니다.
+```
+[Unit]
+Description=IoTHomeHub Web API
+
+[Service]
+WorkingDirectory=/home/urk96/HomeServer
+ExecStart=/usr/bin/dotnet /home/urk96/HomeServer/IoTHubServer.dll --urls="http://127.0.0.1:6002"
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=dotnet-example
+User=urk96
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+```
+위 내용에서 Description 내용은 임의로 변경해도 무방합니다.   
+WorkingDirectory는 Hub Server 배포 파일을 복사한 경로로 수정하셔야 정상적으로 동작합니다.   
+ExecStart에는 .NET 설치 경로 (/usr/bin/dotnet)와 WorkingDirectory + IoTHubServer.dll 경로를 입력하시면 됩니다.   
+또한 urls 인수에는 Apache 서버에서 설정한 Proxy 주소 & 포트를 입력해야 정상적으로 Reverse Proxy가 구성됩니다.   
+User 항목은 Linux 계정 이름을 입력하시면 됩니다.
+
+### 7. Kestrel 서버 등록 & 시작
+Kestrel 구성 파일을 생성 후, 아래 명령어를 입력하여 Kestrel 서버를 Linux System Service에 등록하고 시작합니다.
+```
+sudo systemctl enable kestrel-iot.homehub.com.service
+sudo systemctl start kestrel-iot.homehub.com.service
+```
+해당 명령어 실행 후 재부팅을 권장합니다.   
+만약 서비스 상태를 보고 싶다면 아래 명령어를 입력하여 정보를 봅니다.
+```
+sudo systemctl status kestrel-iot.homehub.com.service
+```
