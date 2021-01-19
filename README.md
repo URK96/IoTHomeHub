@@ -99,4 +99,4 @@ IoT Module : C, C++
   
 ## Project Usage
 본 Project를 동작시키기 위해서는 환경을 구성해야 합니다. 자세한 내용은 Wiki 항목의 Usage 카테고리 내의 페이지를 참조하세요.   
-[Wiki 바로가기](https://github.com/URK96/IoTHomeHub/wiki, "Wiki")
+[Wiki 바로가기](https://github.com/URK96/IoTHomeHub/wiki "Wiki")
