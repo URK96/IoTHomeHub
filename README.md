@@ -51,7 +51,7 @@ IoT Module : C, C++
 * Hub Device Program
   * .NET Core 3.1 [Github](https://github.com/dotnet/core ".NET Core Github")
   * Avalonia UI Framework [Github](https://github.com/AvaloniaUI/Avalonia "Avalonia Framework Github")
-  * DotNet-BlueZ (by NuGet) [Github](https://github.com/hashtagchris/DotNet-BlueZ "DotNet-BlueZ Github")
+  * DotNet-BlueZ (Download on NuGet) [Github](https://github.com/hashtagchris/DotNet-BlueZ "DotNet-BlueZ Github")
   * OpenWeather API [Github](https://github.com/swiftyspiffy/OpenWeatherMap-API-CSharp "3rd-Party OpenWeather C# API Github")
 
 * Hub Device Server
