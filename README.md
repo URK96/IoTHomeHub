@@ -45,23 +45,23 @@ IoT Module : C, C++
 
 ## Framework & Platform
 * SmallDB
-  * .NET Standard 2.0 [Github](https://github.com/dotnet/standard, ".NET Standard Github")
-  * System.Data.DataSetExtensions (for LINQ Extension) [Github](https://github.com/microsoft/referencesource/tree/master/System.Data.DataSetExtensions, "System.Data.DataSetExtensions Github")
+  * .NET Standard 2.0 [Github](https://github.com/dotnet/standard ".NET Standard Github")
+  * System.Data.DataSetExtensions (for LINQ Extension) [Github](https://github.com/microsoft/referencesource/tree/master/System.Data.DataSetExtensions "System.Data.DataSetExtensions Github")
 
 * Hub Device Program
-  * .NET Core 3.1 [Github](https://github.com/dotnet/core, ".NET Core Github")
-  * Avalonia UI Framework [Github](https://github.com/AvaloniaUI/Avalonia, "Avalonia Framework Github")
-  * DotNet-BlueZ (by NuGet) [Github](https://github.com/hashtagchris/DotNet-BlueZ, "DotNet-BlueZ Github")
-  * OpenWeather API [Github](https://github.com/swiftyspiffy/OpenWeatherMap-API-CSharp, "3rd-Party OpenWeather C# API Github")
+  * .NET Core 3.1 [Github](https://github.com/dotnet/core ".NET Core Github")
+  * Avalonia UI Framework [Github](https://github.com/AvaloniaUI/Avalonia "Avalonia Framework Github")
+  * DotNet-BlueZ (by NuGet) [Github](https://github.com/hashtagchris/DotNet-BlueZ "DotNet-BlueZ Github")
+  * OpenWeather API [Github](https://github.com/swiftyspiffy/OpenWeatherMap-API-CSharp "3rd-Party OpenWeather C# API Github")
 
 * Hub Device Server
-  * ASP.NET Core 3.1 (use Web API Template) [Github](https://github.com/dotnet/aspnetcore, "ASP.NET Core Github")
+  * ASP.NET Core 3.1 (use Web API Template) [Github](https://github.com/dotnet/aspnetcore "ASP.NET Core Github")
 
 * Mobile App
-  * Xamarin.Forms [Github](https://github.com/xamarin/Xamarin.Forms, "Xamarin.Forms Github")
+  * Xamarin.Forms [Github](https://github.com/xamarin/Xamarin.Forms "Xamarin.Forms Github")
   
 * IoT Module
-  * Arduino [Github](https://github.com/arduino/Arduino, "Arduino Github")
+  * Arduino [Github](https://github.com/arduino/Arduino "Arduino Github")
   
 ## H/W (with Testing)
 * Hub Device
