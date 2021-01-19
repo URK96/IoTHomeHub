@@ -1,5 +1,5 @@
 # IoTHomeHub
-### Home Hub for IoT Modules  
+### Home Hub Framework for IoT Modules  
 ### 인하대학교 전자공학과 전자공학종합설계 프로젝트   
 본 프로젝트는 전자공학종합설계 과목에서 진행된 자유주제 프로젝트입니다   
 
