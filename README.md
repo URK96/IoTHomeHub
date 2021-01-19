@@ -30,7 +30,21 @@
 Hub Device, Server, Mobile : C#   
 IoT Module : C, C++
 
+## Develop & Run Environment
+* Hub Device
+  * Linux Mint 20 Cinammon (Linux Kernal 5.10.4) (On Develop & Test)
+  * Raspberry OS (Linux Kernal 5.4.51) (On Run & Demo)
+  
+* Mobile
+  * Android (API 23+)
+  * iOS (On Simulator) (iOS 8+)
+  * Windows 10 (UWP)
+
 ## Framework & Platform
+* SmallDB
+  * .NET Standard 2.0 [Github](https://github.com/dotnet/standard, ".NET Standard Github")
+  * System.Data.DataSetExtensions (for LINQ Extension) [Github](https://github.com/microsoft/referencesource/tree/master/System.Data.DataSetExtensions, "System.Data.DataSetExtensions Github")
+
 * Hub Device Program
   * .NET Core 3.1 [Github](https://github.com/dotnet/core, ".NET Core Github")
   * Avalonia UI Framework [Github](https://github.com/AvaloniaUI/Avalonia, "Avalonia Framework Github")
@@ -53,7 +67,6 @@ IoT Module : C, C++
 * Mobile (Cross-Platform)
   * Android Devices
   * Windows 10 PC & Tablet
-  * iOS
 
 * IoT Module
   * Arduino Nano Compatible SBC [Product Detail](https://eduino.kr/product/detail.html?product_no=130&cate_no=134&display_group=1)
@@ -63,3 +76,21 @@ IoT Module : C, C++
 ## Project Framework
 
 <img src="https://github.com/URK96/IoTHomeHub/blob/master/GitImages/ProjectFramework.png" width="70%" height="30%" title="IoTHomeHub Project Framework"></img>
+
+
+## Project Top Directory
+* SmallDB
+  * Project 전반에 사용되는 DB 수정 & 관리를 담당하는 Library (Project Reference로 각 프로젝트에서 참조됨)
+
+* HubDevice
+  * Hub Device에서 실행되는 프로그램 Source Code
+  * Hub Device와 Hub Server로 나뉘어져 있음
+
+* IoTMobileApp
+  * Mobile Device에서 실행되는 Application Source Code
+  * Cross-Platform 이므로 Windows, iOS, Android 지원
+  
+* IoTModule
+  * 센서들과 부가기능이 포함되어 있는 IoT Sample Module Source Code
+  * Project Framework 내에서 BT 통신 규격을 정의한 Header 파일도 포함
+  
