@@ -97,6 +97,6 @@ IoT Module : C, C++
   * 센서들과 부가기능이 포함되어 있는 IoT Sample Module Source Code
   * Project Framework 내에서 BT 통신 규격을 정의한 Header 파일도 포함
   
-## Server Prepare Work
-본 Project의 Server를 동작시키려면 몇 가지 구성 작업이 필요합니다. 자세한 내용은 Wiki 항목의 'Server Configuration' 페이지를 참조하세요.   
-[Wiki 바로가기](https://github.com/URK96/IoTHomeHub/wiki/Server-Configuration, "Wiki - Server Configuration")
+## Project Usage
+본 Project를 동작시키기 위해서는 환경을 구성해야 합니다. 자세한 내용은 Wiki 항목의 Usage 카테고리 내의 페이지를 참조하세요.   
+[Wiki 바로가기](https://github.com/URK96/IoTHomeHub/wiki, "Wiki")
