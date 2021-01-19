@@ -35,8 +35,8 @@ IoT Module : C, C++
 
 ## Develop & Run Environment
 * Hub Device
-  * Linux Mint 20 Cinammon (Linux Kernal 5.10.4) (On Develop & Test)
-  * Raspberry OS (Linux Kernal 5.4.51) (On Run & Demo)
+  * Linux Mint 20 Cinammon (Linux Kernel 5.10.4) (On Develop & Test)
+  * Raspberry OS (Linux Kernel 5.4.51) (On Run & Demo)
   
 * Mobile
   * Android (API 23+)
