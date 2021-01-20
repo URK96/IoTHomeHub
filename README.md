@@ -6,6 +6,9 @@
 ## Project Objective
 다양한 IoT 기기들의 관리 및 모니터링을 하나의 기기로 할 수 있게 하며 외부 접속에 대한 기능을 개별 IoT 기기 대신 통합적으로 제공하는 하나의 Framework를 제작하는 것을 목표로 함
 
+## Project Duration
+2020/9/1 ~ 2020/12/5
+
 ## Contributor  
 * 최진혁 (URK96)
   * Hub Device Framework, Layout 제작
